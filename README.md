@@ -10,12 +10,12 @@
 
 <h3 id="introduction">Introduction</h3>
 <div>
-   In the rapidly evolving field of robotics, one of the major challenges is enabling robots to efficiently manage multiple tasks simultaneously, a concept we refer to as Simultaneous Work. While humans are adept at using both hands to perform different actions concurrently, robots have yet to achieve comparable proficiency. This project aims to address this gap by leveraging Reinforcement Learning algorithms, exploring their potential to not only match but possibly exceed human capabilities in simultaneous task management. Through this approach, we seek to advance the autonomy and versatility of robotic systems, opening new possibilities for their application in complex, real-world environments.
+   In the rapidly evolving field of robotics, one of the major challenges is enabling robots to efficiently manage multiple tasks simultaneously, a concept we refer to as Simultaneous Work. While humans are adept at using both hands to perform different actions concurrently, robots have yet to achieve comparable proficiency. This project aims to address this gap by leveraging Reinforcement Learning algorithms, exploring their potential to not only match but possibly exceed human capabilities in simultaneous task management. Through this approach, we seek to advance the autonomy of robotic systems, opening new possibilities for their application in real-world environments.
 </div>
 
 <h3 id="overview">Overview</h3>
 <div>
-   To facilitate this exploration, we leverage <b>Baxter</b>, humanoid robot as our agent. <a href="https://www.ohio.edu/mechanical-faculty/williams/html/pdf/BaxterKinematics.pdf">Baxter</a> is equipped with two highly versatile arms, making it an ideal candidate for studying dual-arm coordination and manipulation tasks. By using state-of-the-art algorithms, we aim to enable Baxter to perform complex, simultaneous operations that require a high degree of dexterity and precision.<br><br>
+   To facilitate this exploration, we leverage <b>Baxter</b>, humanoid robot as our agent. <a href="https://www.ohio.edu/mechanical-faculty/williams/html/pdf/BaxterKinematics.pdf">Baxter</a> is equipped with two highly versatile arms, making it an ideal candidate for studying dual-arm coordination and manipulation tasks. By using state-of-the-art algorithms, we aim to enable Baxter to perform complex, simultaneous operations.<br><br>
 
    <table align="center">
    <tr align="center">
@@ -45,7 +45,7 @@
    </ul>
 
    <p>
-      We have developed the environment aimed at facilitating fundamental tasks such as simultaneous lifting, touching, and other coordinated actions. At present, The focus is on formulating the <strong>Markov Decision Process (MDP)</strong> and defining a comprehensive joint reward function.
+      We have developed the environment aimed at facilitating fundamental tasks such as simultaneous lifting, touching, and other coordinated actions. At present, The focus is on formulating the <strong>Markov Decision Process (MDP)</strong>.
    </p>
 
    <p>
@@ -70,9 +70,9 @@
             </li>
          </ul>
       </li>
+      <br>
       <li>
          <strong>Joint Reward Function</strong>:
-         <br><br>
          <ul>
             <li>
                <strong>Reward Components</strong>: Creating a reward structure that incentivizes successful completion of tasks, efficient use of both arms, and adherence to predefined task constraints and objectives.
@@ -131,7 +131,7 @@ env = gym.make('baxter_env-v0')
 <p>In addition to these core functions, we have also implemented some auxiliary functions for specific purposes:</p>
 
 <ul>
-   <li><code>env.BeizerCurve()</code>: An implementation of a family of curves that provides a trajectory passing through some points based on specific weights.</li>
+   <li><code>env.BeizerCurve()</code>: An implementation of a family of curves that provides a trajectory passing through points.</li>
    <li><code>env.getReward()</code>: returns the reward for attempting simultaneous touching (a naive implementation).</li>
 </ul>
 <p>
@@ -187,5 +187,5 @@ env = gym.make('baxter_env-v0')
 
 <hr>
 <div>
-    Thank you for visiting! If you find value in this project, please consider giving it a ⭐ star. Your support is greatly appreciated and assists others discover the project. If you have any requests for enhancements or find any bugs, please report them under <a href="https://github.com/asood-life/baxter-sma/issues">Issues</a>. Your feedback is invaluable in making this project better for everyone.
+    Thank you for taking the time to go through this project! If you find it valuable, please consider giving it a ⭐ star. Your support is appreciated and helps others in discovering the project. Should you have any enhancement requests or encounter a bug, please report it in the <a href="https://github.com/asood-life/baxter-sma/issues">Issues</a> section. Your feedback is crucial in improving this project for all.
 </div>
