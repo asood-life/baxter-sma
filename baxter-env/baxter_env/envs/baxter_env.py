@@ -1,27 +1,18 @@
-import gym
+import gym, cv2, time
 from gym import error, spaces, utils
-from gym.utils import seeding
 import pybullet as p
-import pybullet_data
-import time
-import cv2
-import numpy as np
-from scipy.special import comb
+from gym.utils import seeding
 import matplotlib.pyplot as plt
+import pybullet_data
+from scipy.special import comb
+import numpy as np
 
 class BaxterEnv(gym.Env):
     
     metadata = {'render.modes': ['human', 'rgb_array']}
     
+    # Constructor Function:for creating the baxter environment
     def __init__(self):
-
-        """
-        Constructor Function:for creating the baxter environment
-        Arguments:
-            None
-        Returns :  
-            None   
-        """
         try:
             p.connect(p.GUI)
             self.render_mode = p.ER_BULLET_HARDWARE_OPENGL
@@ -87,11 +78,8 @@ class BaxterEnv(gym.Env):
         self.bezier_right = []
 
     def box_poses(self):
-        
         """
         Function to return random position of boxes
-        Arguments:
-            None
         Returns:
             Random positions of boxes
         """
@@ -111,11 +99,8 @@ class BaxterEnv(gym.Env):
         return [pos_1, pos_2]
     
     def reset(self):
-        
         """
         Function to reset the whole simulation
-        Arguments:
-            None
         Returns:
             Dictionary containing information about the environment
         """
@@ -129,10 +114,8 @@ class BaxterEnv(gym.Env):
         n1 = 0
         
         while(n1<1000): 
-            
             p.stepSimulation()
             n1 += 1
-            
         
         self.hand1_pos = p.getLinkState(self.baxter, 29)[0]
         self.hand2_pos = p.getLinkState(self.baxter, 51)[0]
@@ -140,14 +123,12 @@ class BaxterEnv(gym.Env):
         img, depth = self.getImage()
         
         self.state_dict = {"hand_ends": [self.hand1_pos, self.hand2_pos], "eye_view": img, "depth": depth} 
+
         return self.state_dict
     
     def render(self):
-        
         """
         Function to render eye view image of the Environment
-        Argumets:
-            None
         Returns:
             RGB Image of shape: (128,128,3)
         """
@@ -156,11 +137,8 @@ class BaxterEnv(gym.Env):
         return img
 
     def getImage(self):
-        
         """
-        Function to extract eye view image of environemnt
-        Arguments:
-            None
+        Function to extract eye view image of environemnt along with depth image
         Returns:
             Tuple of RGB Image (128,128,3) and Depth Image (128,128)
         """
@@ -181,8 +159,7 @@ class BaxterEnv(gym.Env):
         self.far = 10 
 
         self.projection_matrix = p.computeProjectionMatrixFOV(self.fov, self.aspect_ratio, self.near, self.far)
-        self.image_info = p.getCameraImage(self.width, self.height, self.view_matrix, self.projection_matrix, 
-                                           shadow = True, renderer = self.render_mode)
+        self.image_info = p.getCameraImage(self.width, self.height, self.view_matrix, self.projection_matrix, shadow = True, renderer = self.render_mode)
         
         image = np.array(self.image_info[2]).reshape((self.height, self.width, 4))
         image = image[:, :, [0, 1, 2]]
@@ -195,7 +172,6 @@ class BaxterEnv(gym.Env):
         return image, depth_tiny
 
     def moveVC(self, urdf, joint_indexes, target_poses): 
-        
         """
         Function to move the joints to specified final positions
         Argumets:
@@ -210,28 +186,17 @@ class BaxterEnv(gym.Env):
 
             min_pos, max_pos, f, mv = p.getJointInfo(urdf, joint_index)[8:12]
             
-            if target_pos < min_pos :
-                target_pos = min_pos
-            if target_pos > max_pos :
-                target_pos = max_pos
-            if target_pos - curr_joint_pos < 0:
-                b = -1
-            else:
-                b = 1
+            target_pos = min_pos if target_pos < min_pos else (max_pos if target_pos > max_pos else target_pos)
+
+            b = -1 if target_pos - curr_joint_pos < 0 else 1
 
             c3 = b*(0.02)
-           # c1 = 0
-           # c2 = 0
             
             while (b*curr_joint_pos) < (b*target_pos):
-
-                prev_curr_joint_pos = curr_joint_pos
-                v = (target_pos-curr_joint_pos+c3)*mv
                 
-                if v > mv:
-                    v = mv
-                if v < -mv:
-                    v = -mv
+                v = (target_pos - curr_joint_pos + c3)*mv
+                prev_curr_joint_pos = curr_joint_pos
+                v = mv if v > mv else (-mv if v < -mv else v)
 
                 p.setJointMotorControl2(urdf, joint_index, p.VELOCITY_CONTROL, targetVelocity = v, force = f)
                 p.stepSimulation()
@@ -240,15 +205,14 @@ class BaxterEnv(gym.Env):
                 if (b*prev_curr_joint_pos) >= (b*curr_joint_pos):
                     break
 
-            n1 = 0
-            while n1<10:
+            num_steps = 0
+            while num_steps<10:
                 p.setJointMotorControl2(urdf, joint_index, p.VELOCITY_CONTROL, targetVelocity = 0, force = f)
                 p.stepSimulation()
-                n1 += 1
+                num_steps += 1
 
                 
     def getReward(self, d1, d2):
-        
         """
         Function to return the reward
         Arguments:
@@ -266,10 +230,7 @@ class BaxterEnv(gym.Env):
         return reward_t
     
     def vec_mag(self, v1, v2):
-        
-        """
-        Function to calculate 
-        """
+
         return ((v1[0]-v2[0])**2 + (v1[0]-v2[0])**2 + (v1[0]-v2[0])**2)**(0.5)
     
     def step(self, actions):
@@ -277,17 +238,18 @@ class BaxterEnv(gym.Env):
         """
         Environment Step Function
         Arguments:
-            List of Actions(Points to go)
+            List of Actions (Points to go)
         Returns:
-            Environment Information and Reward
+            ENV Information and Reward
         """
         reward = 0.0
         actions[actions<0] = 0
+
         for i in range(5):
             pts = self.BeizerCurve(actions)
-            right_pos = pts[0]
-            left_pos = pts[1]
-            p1= 0
+            right_pos, left_pos = pts[0], pts[1]
+            
+            p1 = 0
             while p1<5:
                 joint_angles0 = p.calculateInverseKinematics(self.baxter, 29, right_pos)
                 joint_angles1 = p.calculateInverseKinematics(self.baxter, 51, left_pos)
@@ -307,13 +269,14 @@ class BaxterEnv(gym.Env):
             
             reward_n = self.getReward(d1, d2)
             b1 = 0.5
+
             if  (boxes_poses[0][2] < self.box_t_poses[0][2]-b1 or boxes_poses[1][2] < self.box_t_poses[1][2]-b1):
                 reward_n = reward_n-10
                 episode_destroyed = 1
             else:
                 episode_destroyed = 0
-            reward = reward_n + self.discount*reward
-        
+
+            reward = reward_n + self.discount*reward       
             
         img, depth = self.getImage()
 
@@ -326,73 +289,86 @@ class BaxterEnv(gym.Env):
 
         return (state_dict, reward, self.done, {"episode_destroyed":episode_destroyed})
     
-    def BeizerCurve(self,weights):
+    def BeizerCurve(self, weights):
         
-    
+        # Check if bezier_timesteps is 0 to initialize bezier curves
         if self.bezier_timesteps == 0:
-        
-            list_one = [p.getBasePositionAndOrientation(self.box1)[0],p.getLinkState(self.baxter, 29)[0]]
-            list_two = [p.getBasePositionAndOrientation(self.box2)[0],p.getLinkState(self.baxter, 51)[0]]
+            # Define positions and orientations of objects and Baxter robot links
+            list_one = [p.getBasePositionAndOrientation(self.box1)[0], p.getLinkState(self.baxter, 29)[0]]
+            list_two = [p.getBasePositionAndOrientation(self.box2)[0], p.getLinkState(self.baxter, 51)[0]]
 
+            # Separate x, y, z coordinates from list_one
             x_one = [p[0] for p in list_one]
             y_one = [p[1] for p in list_one]
             z_one = [p[2] for p in list_one]
 
-            x_one_mid = (x_one[0]+x_one[1])/2
-            y_one_mid = (y_one[0]+y_one[1])/2
-            z_one_mid = (z_one[0]+z_one[1])/2
+            # Calculate midpoints for bezier curve calculation
+            x_one_mid = (x_one[0] + x_one[1]) / 2
+            y_one_mid = (y_one[0] + y_one[1]) / 2
+            z_one_mid = (z_one[0] + z_one[1]) / 2
 
+            # Append midpoints to lists
             x_one.append(x_one_mid)
             y_one.append(y_one_mid)
             z_one.append(z_one_mid)
 
+            # Store bezier curve points for the right side
             self.bezier_right = [x_one, y_one, z_one]
 
+            # Separate x, y, z coordinates from list_two
             x_two = [p[0] for p in list_two]
             y_two = [p[1] for p in list_two]
             z_two = [p[2] for p in list_two]
 
-            x_two_mid = (x_two[0]+x_two[1])/2
-            y_two_mid = (y_two[0]+y_two[1])/2
-            z_two_mid = (z_two[0]+z_two[1])/2
+            # Calculate midpoints for bezier curve calculation
+            x_two_mid = (x_two[0] + x_two[1]) / 2
+            y_two_mid = (y_two[0] + y_two[1]) / 2
+            z_two_mid = (z_two[0] + z_two[1]) / 2
 
+            # Append midpoints to lists
             x_two.append(x_two_mid)
             y_two.append(y_two_mid)
             z_two.append(z_two_mid)
 
+            # Store bezier curve points for the left side
             self.bezier_left = [x_two, y_two, z_two]
-            
-        points_one,points_two = [],[]
 
-        n,t_i = 3,np.linspace(0.0,1.0,6)[1:]
-        t=t_i[self.bezier_timesteps]
+        # Initialize empty lists for storing bezier curve points
+        points_one, points_two = [], []
 
-        polynomial_array_one = np.array([(comb(n,i)*(t**(i)) *(1-t)**(n-i))*w for i,w in zip(range(0,3),weights[:3])])
-        polynomial_array_two = np.array([(comb(n,i)*(t**(i)) *(1-t)**(n-i))*w for i,w in zip(range(0,3),weights[3:])])
+        # Set polynomial degree and generate time steps for bezier curve calculation
+        n, t_i = 3, np.linspace(0.0, 1.0, 6)[1:]
+        t = t_i[self.bezier_timesteps]
 
+        # Calculate polynomial coefficients for bezier curves using weights
+        polynomial_array_one = np.array([(comb(n, i) * (t ** (i)) * (1 - t) ** (n - i)) * w for i, w in zip(range(0, 3), weights[:3])])
+        polynomial_array_two = np.array([(comb(n, i) * (t ** (i)) * (1 - t) ** (n - i)) * w for i, w in zip(range(0, 3), weights[3:])])
+
+        # Calculate bezier curve values for the right side
         x_one_values = np.dot(self.bezier_right[0], polynomial_array_one)
         y_one_values = np.dot(self.bezier_right[1], polynomial_array_one)
         z_one_values = np.dot(self.bezier_right[2], polynomial_array_one)
 
+        # Calculate bezier curve values for the left side
         x_two_values = np.dot(self.bezier_left[0], polynomial_array_two)
         y_two_values = np.dot(self.bezier_left[1], polynomial_array_two)
         z_two_values = np.dot(self.bezier_left[2], polynomial_array_two)
 
-        points_one.extend([x_one_values,y_one_values,z_one_values])
-        points_two.extend([x_two_values,y_two_values,z_two_values])
+        # Append bezier curve values to points_one and points_two lists
+        points_one.extend([x_one_values, y_one_values, z_one_values])
+        points_two.extend([x_two_values, y_two_values, z_two_values])
 
-        self.bezier_timesteps+=1
+        # Increment bezier_timesteps and apply modulo operation to limit within 0-4 range
+        self.bezier_timesteps += 1
         self.bezier_timesteps = self.bezier_timesteps % 5
 
-        return points_one,points_two
+        # Return the calculated bezier curve points for both sides
+        return points_one, points_two
 
     def sample_action(self):
         '''
         Function which gives random action
-        Arguments:
-        None
-
-        Return:
+        Returns:
         Vector of length 6
         '''
         action = np.random.uniform(-1, 1, (6,))
