@@ -5,7 +5,8 @@
     <li><a href="#implementation">Implementation</a></li>
     <li><a href="#installation-and-setup">Installation and Setup</a></li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#contributors">Contributors</a></li>
+    <li><a href="#future-work">Future Work</a></li>
+    <li><a href="#team">Team</a></li>
 </ul>
 
 <h3 id="introduction">Introduction</h3>
@@ -139,7 +140,35 @@ env = gym.make('baxter_env-v0')
 </p>
 <p>Example scripts demonstrating the usage of these functions can be found <a href="examples/">here</a>.</p>
 
-<h3 id="contributors">Contributors</h3>
+<h3 id="future-work">Future Work</h3>
+<div>
+   As we continue to push the boundaries of what robotic systems can achieve, there are several key areas where we see potential for significant future advancements:
+   <h4>1. Enhanced Learning Algorithms</h4>
+   <p>
+      While our current implementation leverages existing reinforcement learning algorithms, there is a vast landscape of emerging techniques that could be explored. Future work could focus on integrating more advanced methods such as deep reinforcement learning, hierarchical reinforcement learning, or multi-agent reinforcement learning to enhance the robot's ability to perform complex simultaneous tasks.
+   </p>
+   <h4>2. Real-World Integration</h4>
+   <p>
+      Transitioning from simulated environments to real-world applications poses a significant challenge. Future efforts will aim at testing and refining our models in real-world settings to address issues such as sensor noise, unexpected obstacles, and dynamic changes in the environment. This will involve robust testing and possibly redesigning the reward structures and action spaces to better suit real-world conditions.
+   </p>
+   <h4>3. Expanded Task Set</h4>
+   <p>
+      Currently, our tasks are relatively simple and focused on basic interactions. Expanding the range of tasks to include more complex and varied activities such as assembly, cooking, or even medical procedures could provide deeper insights into the capabilities and limitations of reinforcement learning in robotic applications. This expansion would also necessitate more sophisticated MDP formulations and reward functions.
+   </p>
+   <h4>4. Human-Robot Collaboration</h4>
+   <p>
+      Another exciting avenue for future work is the exploration of human-robot collaboration. Enabling robots to understand and predict human actions, and to coordinate tasks in a shared workspace, could greatly enhance the utility of robotic systems in industries like manufacturing, healthcare, and domestic environments. This would require advancements in both perception algorithms and collaborative task planning.
+   </p>
+   <h4>5. Hardware Integration</h4>
+   <p>
+      As new robotic hardware becomes available, integrating these advancements into our system will be crucial. This includes more dexterous robotic arms, better sensory equipment, and improved computational capabilities. Future work will involve adapting our software to take full advantage of these hardware improvements, potentially enabling even more complex and precise task execution.
+   </p>
+   <p>
+      By pursuing these areas of future work, we aim to not only enhance the capabilities of our robotic systems but also ensure their safe, ethical, and effective integration into society. We look forward to the continued evolution of this exciting field and the new possibilities it will bring.
+   </p>
+</div>
+
+<h3 id="team">Team</h3>
 <div>
     <table>
       <td align="center">
