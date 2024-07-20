@@ -56,7 +56,9 @@
       <li>
          <strong>Markov Decision Process (MDP) Formulation</strong>:
          <br><br>
-         <div align="center"><img src="https://www.mdpi.com/entropy/entropy-24-00279/article_deploy/html/images/entropy-24-00279-g002.png" width="500"></div>
+         <div align="center">
+            <img src="https://www.mdpi.com/entropy/entropy-24-00279/article_deploy/html/images/entropy-24-00279-g002.png" width="500">
+         </div>
          <br><br>
          <ul>
             <li>
@@ -134,6 +136,13 @@ env = gym.make('baxter_env-v0')
    <li><code>env.BezierCurve()</code>: An implementation of a family of curves that provides a trajectory passing through points.</li>
    <li><code>env.getReward()</code>: returns the reward for attempting simultaneous touching (a naive implementation).</li>
 </ul>
+
+<br>
+<div align="center">
+   <img src="./media/bezier-curve.png" width="400">
+</div>
+<br><br>
+
 <p>
    For further details on theze functions and their arguments, please refer to the documentation <a href="baxter-env/baxter_env/envs/baxter_env.py">here</a>.
 </p>
@@ -141,10 +150,9 @@ env = gym.make('baxter_env-v0')
 
 <h3 id="future-work">Future Work</h3>
 <div>
-   As we continue to push the boundaries of what robotic systems can achieve, there are several key areas where we see potential for significant future advancements:
    <h4>1. Enhanced Learning Algorithms</h4>
    <p>
-      While our current implementation leverages existing reinforcement learning algorithms, there is a vast landscape of emerging techniques that could be explored. Future work could focus on integrating more advanced methods such as deep reinforcement learning, hierarchical reinforcement learning, or multi-agent reinforcement learning to enhance the robot's ability to perform complex simultaneous tasks.
+      While our current implementation leverages existing reinforcement learning algorithms, there is a vast landscape of emerging techniques that could be explored. Future work could focus on integrating more advanced methods such as deep reinforcement learning, hierarchical reinforcement learning, or multi-agent reinforcement learning.
    </p>
    <h4>2. Real-World Integration</h4>
    <p>
@@ -152,7 +160,7 @@ env = gym.make('baxter_env-v0')
    </p>
    <h4>3. Expanded Task Set</h4>
    <p>
-      Currently, our tasks are relatively simple and focused on basic interactions. Expanding the range of tasks to include more complex and varied activities such as assembly, cooking, or even medical procedures could provide deeper insights into the capabilities and limitations of reinforcement learning in robotic applications. This expansion would also necessitate more sophisticated MDP formulations and reward functions.
+      Currently, our tasks are relatively simple and focused on basic interactions. Expanding the range of tasks to include more complex and varied activities such as assembly, cooking, or even medical procedures could provide deeper insights into the capabilities and limitations of reinforcement learning in robotic applications.
    </p>
    <h4>4. Human-Robot Collaboration</h4>
    <p>
@@ -160,10 +168,7 @@ env = gym.make('baxter_env-v0')
    </p>
    <h4>5. Hardware Integration</h4>
    <p>
-      As new robotic hardware becomes available, integrating these advancements into our system will be crucial. This includes more dexterous robotic arms, better sensory equipment, and improved computational capabilities. Future work will involve adapting our software to take full advantage of these hardware improvements, potentially enabling even more complex and precise task execution.
-   </p>
-   <p>
-      By pursuing these areas of future work, we aim to not only enhance the capabilities of our robotic systems but also ensure their safe, ethical, and effective integration into society. We look forward to the continued evolution of this exciting field and the new possibilities it will bring.
+      As new robotic hardware becomes available, integrating these advancements into our system will be crucial. This includes more dexterous robotic arms, better sensory equipment, and improved computational capabilities. Future work will involve adapting our software to take full advantage of these hardware improvements.
    </p>
 </div>
 
