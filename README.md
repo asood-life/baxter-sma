@@ -116,7 +116,7 @@ env = gym.make('baxter_env-v0')
 
 <ul>
    <li>
-      <code>env.getImage()</code>: returns a tuple containing a <b>128x128 RGB</b> image along with the depth map of the environment.
+      <code>env.getImage()</code>: returns a tuple containing <b>128x128 RGB</b> image along with depth map of environment.
    </li>
    <br>
    <p align="center">
