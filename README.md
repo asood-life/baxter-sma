@@ -99,7 +99,7 @@
 
 <h3 id="usage">Usage</h3>
 <div>
-   After setting up the environment, import it into your workspace using the following python code
+   Upon installing and setting up the environment, import it into your workspace using the following python code
 </div>
 <br>
 
@@ -134,7 +134,7 @@ env = gym.make('baxter_env-v0')
 
 <ul>
    <li><code>env.BezierCurve()</code>: An implementation of a family of curves that provides a trajectory passing through points.</li>
-   <li><code>env.getReward()</code>: returns the reward for attempting simultaneous touching (a naive implementation).</li>
+   <li><code>env.getReward()</code>: returns the reward for attempting simultaneous touching (a naive method).</li>
 </ul>
 
 <br>
@@ -164,7 +164,7 @@ env = gym.make('baxter_env-v0')
    </p>
    <h4>4. Human-Robot Collaboration</h4>
    <p>
-      Another exciting avenue for future work is the exploration of human-robot collaboration. Enabling robots to understand and predict human actions, and to coordinate tasks in a shared workspace, could greatly enhance the utility of robotic systems in industries like manufacturing, healthcare, and domestic environments. This would require advancements in both perception algorithms and collaborative task planning.
+      Another exciting avenue for future work is the exploration of human-robot collaboration. Enabling robots to understand and predict human actions, and to coordinate tasks in a shared workspace, could greatly enhance the adoption of robotic systems in industries such as manufacturing, healthcare and domestic environments.
    </p>
    <h4>5. Hardware Integration</h4>
    <p>
