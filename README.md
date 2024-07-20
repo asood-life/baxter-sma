@@ -162,14 +162,6 @@ env = gym.make('baxter_env-v0')
    <p>
       Currently, our tasks are relatively simple and focused on basic interactions. Expanding the range of tasks to include more complex and varied activities such as assembly, cooking, or even medical procedures could provide deeper insights into the capabilities and limitations of reinforcement learning in robotic applications.
    </p>
-   <h4>4. Human-Robot Collaboration</h4>
-   <p>
-      Another exciting avenue for future work is the exploration of human-robot collaboration. Enabling robots to understand and predict human actions, and to coordinate tasks in a shared workspace, could greatly enhance the adoption of robotic systems in industries such as manufacturing, healthcare and domestic environments.
-   </p>
-   <h4>5. Hardware Integration</h4>
-   <p>
-      As new robotic hardware becomes available, integrating these advancements into our system will be crucial. This includes more dexterous robotic arms, better sensory equipment, and improved computational capabilities. Future work will involve adapting our software to take full advantage of these hardware improvements.
-   </p>
 </div>
 
 <h3 id="team">Team</h3>
