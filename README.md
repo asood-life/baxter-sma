@@ -41,8 +41,7 @@
       <li>Creating the environmental setup</li>
       <li>Defining a comprehensive <strong>Joint Reward</strong> function</li>
       <li>Learning simple simultaneous tasks</li>
-      <li>Gradually increasing complexity of task</li>
-      <li>Elevating interactions</li>
+      <li>Elevating interaction levels</li>
    </ul>
 
    <p>
@@ -132,7 +131,7 @@ env = gym.make('baxter_env-v0')
 <p>In addition to these core functions, we have also implemented some auxiliary functions for specific purposes:</p>
 
 <ul>
-   <li><code>env.BeizerCurve()</code>: An implementation of a family of curves that provides a trajectory passing through points.</li>
+   <li><code>env.BezierCurve()</code>: An implementation of a family of curves that provides a trajectory passing through points.</li>
    <li><code>env.getReward()</code>: returns the reward for attempting simultaneous touching (a naive implementation).</li>
 </ul>
 <p>

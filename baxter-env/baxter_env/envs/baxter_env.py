@@ -289,7 +289,7 @@ class BaxterEnv(gym.Env):
 
         return (state_dict, reward, self.done, {"episode_destroyed":episode_destroyed})
     
-    def BeizerCurve(self, weights):
+    def BezierCurve(self, weights):
         
         # Check if bezier_timesteps is 0 to initialize bezier curves
         if self.bezier_timesteps == 0:
