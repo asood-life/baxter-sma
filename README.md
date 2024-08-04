@@ -11,7 +11,7 @@
 
 <h3 id="introduction">Introduction</h3>
 <div>
-   In the rapidly evolving field of robotics, one of the major challenges is enabling robots to efficiently manage multiple tasks simultaneously, a concept we refer to as Simultaneous Work. While humans are adept at using both hands to perform different actions concurrently, robots have yet to achieve comparable proficiency. This project aims to address this gap by leveraging Reinforcement Learning algorithms, exploring their potential to not only match but possibly exceed human capabilities in simultaneous task management. Through this approach, we seek to advance the autonomy of robotic systems, opening new possibilities for their application in real-world environments.
+   In the rapidly evolving field of robotics, one of the major challenges is enabling robots to efficiently manage multiple tasks simultaneously, a concept we refer to as Simultaneous Work. While humans are adept at using both hands to perform different actions concurrently, robots have yet to achieve comparable proficiency. This project aims to address this gap by leveraging Reinforcement Learning algorithms, exploring their potential to not only match but possibly exceed human capabilities in simultaneous task management. Through this approach, we seek to advance the autonomy of robotic systems, opening new possibilities for their application in real-world.
 </div>
 
 <h3 id="overview">Overview</h3>
@@ -29,7 +29,7 @@
    </tr>
    </table>
    <br>
-   The realised environment is fully compatible with the OpenAI Gym framework, allowing for seamless integration with existing RL libraries and tools. The simulation is powered by PyBullet, a robust and widely-used physics engine that provides realistic and accurate modeling of robotic interactions.
+   The realised environment is fully compatible with the OpenAI Gym framework, allowing for seamless integration with existing RL libraries and tools. The simulation is powered by PyBullet, a robust and widely-used physics engine that provides realistic and accurate modeling of robotic interactions in real world environments.
    <br>
    <br><img width="800" height="400" src="media/env.png"><br>
 </div>
@@ -49,7 +49,7 @@
    </p>
 
    <p>
-      By focusing on these elements, we aim to create a robust framework that will enable the agent to learn and perform simultaneous tasks with increasing complexity. This approach will help in understanding how reinforcement learning algorithms can be utilized to achieve and potentially surpass human-like proficiency in coordinated tasks.
+      By focusing on these elements, we aim to create a robust framework that will enable the agent to learn and perform simultaneous tasks with increasing complexity. This approach will help in understanding how RL algorithms can be utilized to achieve and surpass human-like proficiency in coordinated tasks.
    </p>
 
    <ol>
@@ -89,7 +89,7 @@
 
 <h3 id="installation-and-setup">Installation and Setup</h3>
 <blockquote>
-   It is recommended to set up a virtual environment to avoid conflicts between package versions installed on your system and keep your workspace organized. To create a virtual environment and activate it, please follow the instructions detailed on <a href="https://docs.python.org/3/library/venv.html">python venv page</a>. The procedure to deactivate the environment is also provided here.
+   It is recommended to set up a virtual environment to avoid conflicts between package versions installed on your system and keep your workspace organized. To create a virtual environment and activate it, please follow the instructions detailed on <a href="https://docs.python.org/3/library/venv.html">python venv page</a>. The procedure to deactivate environment is also given.
 </blockquote>
 <br>
 <ul>
@@ -125,7 +125,7 @@ env = gym.make('baxter_env-v0')
       <p align="center"><b>Image Data with Depth Map</b></p>
    </p>
    <li><code>env.moveVC()</code>: moves the joints to a specified position by taking the index of that joint.</li>
-   <li><code>env.step()</code>: input a list of actions and perform those while providing the required information about the states.</li>
+   <li><code>env.step()</code>: input a list of actions and perform those while providing required information about states.</li>
    <li><code>env.render()</code>: renders the eye view image of the environment.</li>
    <li><code>env.reset()</code>: reset the entire environment and retrieve information regarding the state.</li>
 </ul>
@@ -133,7 +133,7 @@ env = gym.make('baxter_env-v0')
 <p>In addition to these core functions, we have also implemented some auxiliary functions for specific purposes:</p>
 
 <ul>
-   <li><code>env.BezierCurve()</code>: An implementation of a family of curves that provides a trajectory passing through points.</li>
+   <li><code>env.BezierCurve()</code>: implementation of a family of curves that provides a trajectory through points.</li>
    <li><code>env.getReward()</code>: returns the reward for attempting simultaneous touching (a naive method).</li>
 </ul>
 
@@ -152,13 +152,13 @@ env = gym.make('baxter_env-v0')
 <div>
    <h4>1. Enhanced Learning Algorithms</h4>
    <p>
-      While our current implementation leverages existing reinforcement learning algorithms, there is a vast landscape of emerging techniques that could be explored. Future work could focus on integrating more advanced methods such as deep reinforcement learning, hierarchical reinforcement learning, or multi-agent reinforcement learning.
+      While our current implementation leverages existing reinforcement learning algorithms, there is a vast landscape of emerging techniques that could be explored. Future work could focus on integrating more advanced methods such as deep reinforcement learning, hierarchical or multi-agent reinforcement learning.
    </p>
    <h4>2. Real-World Integration</h4>
    <p>
       Transitioning from simulated environments to real-world applications poses a significant challenge. Future efforts will aim at testing and refining our models in real-world settings to address issues such as sensor noise, unexpected obstacles, and dynamic changes in the environment. This will involve robust testing and possibly redesigning the reward structures and action spaces to better suit real-world conditions.
    </p>
-   <h4>3. Expanded Task Set</h4>
+   <h4>3. Expanded Collection of Tasks</h4>
    <p>
       Currently, our tasks are relatively simple and focused on basic interactions. Expanding the range of tasks to include more complex and varied activities such as assembly, cooking, or even medical procedures could provide deeper insights into the capabilities and limitations of reinforcement learning in robotic applications.
    </p>
@@ -212,5 +212,5 @@ env = gym.make('baxter_env-v0')
 
 <hr>
 <div>
-    Thank you for taking the time to go through this project! If you find it valuable, please consider giving it a ⭐ star. Your support is appreciated and helps others in discovering the project. Should you have any enhancement requests or encounter a bug, please report it in the <a href="https://github.com/asood-life/baxter-sma/issues">Issues</a> section. Your feedback is crucial in improving this project for all.
+    Thank you for taking the time to go through this project! If you find it valuable, please consider giving it a ⭐ star. Your support is appreciated and helps others in discovering the project. Should you have enhancement requests or encounter a bug, please report it in the <a href="https://github.com/asood-life/baxter-sma/issues">Issues</a> section. Your feedback is crucial in improving this project.
 </div>
